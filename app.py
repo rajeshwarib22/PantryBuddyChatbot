@@ -1,15 +1,17 @@
+# import required 
 import streamlit as st
 import google.generativeai as genai
 import os
 import dotenv
 
+# to load the dot env file
 dotenv.load_dotenv()
 
 api_key = os.getenv("API_KEY")
 genai.configure(api_key=api_key)
 
 
-
+# state which gemini model you are using
 model =  genai.GenerativeModel("gemini-2.0-flash")
 
 def response(messages):
@@ -20,6 +22,8 @@ def response(messages):
     return f"Error {str(e)}"
 
 
+# this funtion is resposible for chatbot to answer to your questions related to that topics
+# the system propmt plays important role telling how the chatbot is supposed to answer
 def fetch_conversation_history():
   if "messages" not in st.session_state:
     st.session_state["messages"] = [
